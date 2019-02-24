@@ -4,8 +4,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class DisplayNodes extends Component {
+  state = {
+    sortBy: 'Unsorted'
+  };
+
   static propTypes = {
     nodes: PropTypes.object.isRequired
+  };
+
+  handleClick = e => {
+    this.setState({ sortBy: [e.target.name] });
   };
 
   render() {
@@ -13,6 +21,39 @@ class DisplayNodes extends Component {
     // console.log(allNodes);
     return (
       <div className="container">
+        <div className="dropdown">
+          <button
+            className="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenu2"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            style={{ marginTop: 10, marginBottom: 10 }}
+          >
+            {this.state.sortBy}
+          </button>
+          <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button
+              className="dropdown-item"
+              type="button"
+              name="By Node Number"
+              value="By Node Number"
+              onClick={this.handleClick}
+            >
+              By Node Number
+            </button>
+            <button
+              className="dropdown-item"
+              type="button"
+              name="By Node Weight"
+              value="By Node Weight"
+              onClick={this.handleClick}
+            >
+              By Node Weight
+            </button>
+          </div>
+        </div>
         <table className="table table-striped">
           <thead>
             <tr>
