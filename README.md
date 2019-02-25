@@ -1,3 +1,13 @@
+To run -
+
+### `1. Clone the Project`
+### `2. Navigate to the directory using terminal`
+### `3. run npm install (Node is required for this)`
+### `4. Once everything is installed run npm start`
+### `5. Should open the project in the browser`
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
