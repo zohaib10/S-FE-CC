@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
+
+import { sortBy } from '../actions/sortActions';
 
 class DisplayNodes extends Component {
   state = {
@@ -13,7 +14,10 @@ class DisplayNodes extends Component {
   };
 
   handleClick = e => {
-    this.setState({ sortBy: [e.target.name] });
+    this.setState(
+      { sortBy: [e.target.name] },
+      this.props.sortBy(e.target.name)
+    );
   };
 
   render() {
@@ -38,7 +42,6 @@ class DisplayNodes extends Component {
               className="dropdown-item"
               type="button"
               name="By Node Number"
-              value="By Node Number"
               onClick={this.handleClick}
             >
               By Node Number
@@ -47,7 +50,6 @@ class DisplayNodes extends Component {
               className="dropdown-item"
               type="button"
               name="By Node Weight"
-              value="By Node Weight"
               onClick={this.handleClick}
             >
               By Node Weight
@@ -100,4 +102,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(DisplayNodes);
+const mapDispatchToProps = dispatch => {
+  return {
+    sortBy: method => {
+      dispatch(sortBy(method));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayNodes);
