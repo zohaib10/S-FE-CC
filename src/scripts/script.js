@@ -2,7 +2,7 @@ import { generateNodes } from './generate_nodes.js';
 
 export const getNodes = () => {
   // We will test your final solution with tens of thousands of nodes.
-  const nNodes = 100;
+  const nNodes = 1000;
 
   // Use `undefined` for a new sequence each page reload.
   const seed = 2357;

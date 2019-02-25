@@ -1,6 +1,11 @@
-import { ADD_NODES, SORT_BY_NUMBER, SORT_BY_WEIGHT } from '../actions/types';
+import {
+  ADD_NODES,
+  SORT_BY_NUMBER,
+  SORT_BY_WEIGHT,
+  SHOW_MORE_NODES
+} from '../actions/types';
 
-const initialState = { nodes: {} };
+const initialState = { nodes: {}, numNodes: 30 };
 
 const getWeights = nodes => {
   var obj = {};
@@ -17,9 +22,14 @@ const getWeights = nodes => {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NODES:
+      var val = 0;
+      for (var key in action.nodes) {
+        val++;
+      }
       return {
         ...state,
-        nodes: action.nodes
+        nodes: action.nodes,
+        totalNodes: val
       };
     case SORT_BY_NUMBER:
       const keys = Object.keys(state.nodes);
@@ -34,7 +44,8 @@ const rootReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        nodes: sortedNodes
+        nodes: sortedNodes,
+        numNodes: 30
       };
     case SORT_BY_WEIGHT:
       //get weights of each node
@@ -49,9 +60,14 @@ const rootReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        nodes: sortedNodes
+        nodes: sortedNodes,
+        numNodes: 30
       };
-
+    case SHOW_MORE_NODES:
+      return {
+        ...state,
+        numNodes: state.numNodes + action.payload
+      };
     default:
       return state;
   }
